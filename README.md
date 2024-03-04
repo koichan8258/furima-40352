@@ -29,10 +29,10 @@
 | category_id        | integer    | null:false                     |
 | situation_id       | integer    | null:false                     |
 | delivery_charge_id | integer    | null:false                     |
-| shipping_region_id | integer    | null:false                     |
+| prefecture_id      | integer    | null:false                     |
 | shipping_day_id    | integer    | null:false                     |
 | selling_price      | integer    | null:false                     |
-| user               | references | foregin_key: true, null: false |
+| user               | references | foreign_key: true, null: false |
 
 
 ### Association
@@ -45,8 +45,8 @@
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| user            | references | foregin_key: true, null: false |
-| item            | references | foregin_key: true, null: false |
+| user            | references | foreign_key: true, null: false |
+| item            | references | foreign_key: true, null: false |
 
 ### Association
 - belongs_to: user
@@ -67,7 +67,7 @@
 | street_address  | string     | null:false                     |
 | building_name   | string     |                                |
 | telephon_number | string     | null:false                     |
-| record          | references | foregin_key: true, null: false |
+| record          | references | foreign_key: true, null: false |
 
 ### Association
 - belongs_to: record
