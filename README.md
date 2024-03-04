@@ -22,17 +22,17 @@
 
 ## itemsテーブル
 
-| Column             | Type       | Options                  |
-| ------------------ | ---------- | ------------------------ |
-| item_name          | string     | null:false               |
-| explain            | text       | null:false               |
-| category_id        | integer    | null:false               |
-| situation_id       | integer    | null:false               |
-| delivery_charge_id | integer    | null:false               |
-| shipping_region_id | integer    | null:false               |
-| shipping_days_id   | integer    | null:false               |
-| selling_price      | string     | null:false               |
-| user               | references | foregin_key: true, null: false        |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| item_name          | string     | null:false                     |
+| explain            | text       | null:false                     |
+| category_id        | integer    | null:false                     |
+| situation_id       | integer    | null:false                     |
+| delivery_charge_id | integer    | null:false                     |
+| shipping_region_id | integer    | null:false                     |
+| shipping_day_id    | integer    | null:false                     |
+| selling_price      | integer    | null:false                     |
+| user               | references | foregin_key: true, null: false |
 
 
 ### Association
@@ -43,31 +43,31 @@
 
 ## recordsテーブル
 
-| Column          | Type       | Options                  |
-| --------------- | ---------- | ------------------------ |
-| user            | references | foregin_key: true, null: false        |
-| item            | references | foregin_key: true, null: false        |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| user            | references | foregin_key: true, null: false |
+| item            | references | foregin_key: true, null: false |
 
 ### Association
 - belongs_to: user
 - belongs_to: item
-- has_one: shipping-address
+- has_one: shipping_address
 
 
 
 
 
-## shipping-addressテーブル
+## shipping_addressテーブル
 
-| Column          | Type       | Options                  |
-| --------------- | ---------- | ------------------------ |
-| post_cord       | string     | null:false               |
-| prefecture_id   | integer    | null:false               |
-| municipalities  | string     | null:false               |
-| street_address  | string     | null:false               |
-| building_name   | string     |                          |
-| telephon_number | string     | null:false               |
-| record          | references | foregin_key: true, null: false        |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| post_cord       | string     | null:false                     |
+| prefecture_id   | integer    | null:false                     |
+| municipalities  | string     | null:false                     |
+| street_address  | string     | null:false                     |
+| building_name   | string     |                                |
+| telephon_number | string     | null:false                     |
+| record          | references | foregin_key: true, null: false |
 
 ### Association
 - belongs_to: record
