@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_07_022753) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_07_235512) do
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_07_022753) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "remember_created_at"
+    t.string "reset_password_token"
   end
 
 end
