@@ -5,24 +5,23 @@ RSpec.describe User, type: :model do
     @item = FactoryBot.build(:item)
   end
 
-  
   describe '商品の出品' do
     context '商品が出品できる場合' do
-      it "必要な情報を適切に入力すると、出品できる" do
-        user = FactoryBot.create(:user) 
+      it '必要な情報を適切に入力すると、出品できる' do
+        user = FactoryBot.create(:user)
         @item = FactoryBot.build(:item, user_id: user.id)
         expect(@item).to be_valid
       end
     end
 
     context '商品が出品できない場合' do
-      it "imageが空では登録できない" do
+      it 'imageが空では登録できない' do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
-      it "item_nameが空では登録できない" do
+      it 'item_nameが空では登録できない' do
         @item.item_name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item name can't be blank")
@@ -31,7 +30,7 @@ RSpec.describe User, type: :model do
       it 'explainが空では登録できない' do
         @item.explain = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include ("Explain can't be blank")
+        expect(@item.errors.full_messages).to include("Explain can't be blank")
       end
 
       it 'explainが1000文字を超えていると登録できない' do
@@ -73,7 +72,7 @@ RSpec.describe User, type: :model do
       it 'selling_priceが空では登録できない' do
         @item.selling_price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include ("Selling price is not a number")
+        expect(@item.errors.full_messages).to include('Selling price is not a number')
       end
 
       it 'selling_priceが300円未満では登録できない' do
@@ -99,8 +98,6 @@ RSpec.describe User, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Selling price is not a number')
       end
-
-
     end
   end
 end
