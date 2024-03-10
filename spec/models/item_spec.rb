@@ -15,7 +15,6 @@ RSpec.describe User, type: :model do
     end
 
     context '商品が出品できない場合' do
-
       it 'userが紐付いていないと保存できない' do
         @item.user = nil
         @item.valid?
