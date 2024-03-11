@@ -1,6 +1,9 @@
 class RecordShipping
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :post_cord, :prefecture_id, :municipalities, :street_address, :building_name, :telephon_number
+ 
+
+
 
 
   with_options presence: true do
