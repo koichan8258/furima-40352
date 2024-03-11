@@ -6,7 +6,8 @@ class RecordsController < ApplicationController
 
   def create
     @record_form = RecordShippingForm.new(record_params)
-    if @record_form.save
+    if @record_form.valid?
+      @record_form.save
       redirect_to root_path
     else
       render :index
@@ -17,7 +18,7 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record_form).permit(:user_id, :item_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number)
+    params.require(:record_form).permit(:user_id, :item_id, :postal_code, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number)
   end
 
 
