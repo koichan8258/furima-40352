@@ -1,14 +1,17 @@
-class RecordShippingForm
+class RecordShipping
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :post_cord, :prefecture_id, :municipalities, :street_address, :building_name, :telephon_number
 
-  validates :user_id, presence: true
-  validates :item_id, presence: true
-  validates :post_cord, presence: true
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :municipalities, presence: true
-  validates :street_address, presence: true
-  validates :telephon_number, presence: true
+
+  with_options presence: true do
+    validates :user_id
+    validates :item_id
+    validates :post_cord, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :municipalities
+    validates :street_address
+    validates :telephon_number, format: { with: /\A\d{10,11}\z/, message: "must be 10 or 11 digits" }
+  end
 
 
   def save

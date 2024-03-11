@@ -1,16 +1,23 @@
 class RecordsController < ApplicationController
+  before_action :authenticate_user!, except: :index
+
   def index
     @item = Item.find(params[:item_id])
-    @record_form = RecordShippingForm.new
+    @record_shipping = RecordShipping.new
+  end
+
+  def new
+    @record_shipping = RecordShipping.new
   end
 
   def create
-    @record_form = RecordShippingForm.new(record_params)
-    if @record_form.valid?
-      @record_form.save
+    @record_shipping = RecordShipping.new(record_params)
+    if @record_shipping.valid?
+      @record_shipping.save
       redirect_to root_path
     else
-      render :index
+      @item = Item.find(params[:item_id])
+      render :index, status: :unprocessable_entity
     end
   end
 
@@ -18,8 +25,9 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record_form).permit(:user_id, :item_id, :postal_code, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number)
+    params.require(:record_shipping).permit(:postal_code, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
+
 
 
 end
