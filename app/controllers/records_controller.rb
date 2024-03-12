@@ -13,6 +13,7 @@ class RecordsController < ApplicationController
   def create
     @record_shipping = RecordShipping.new(record_params)
     if @record_shipping.valid?
+      pay_item
       @record_shipping.save
       redirect_to root_path
     else
@@ -25,9 +26,20 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record_shipping).permit(:post_cord, :prefecture_id, :municipalities, :street_address, :building_name, :telephon_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:record_shipping).permit(:post_cord, :prefecture_id, :municipalities, :street_address, :building_name, :telephon_number, :selling_price).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
+  def pay_item
+    Payjp.api_key = "sk_test_8fb240c5c4f4845ea3ee1726"
 
+      item = Item.find(record_params[:item_id])
+      selling_price = item.selling_price
+
+      Payjp::Charge.create(
+        amount: selling_price,
+        card: record_params[:token],
+        currency: 'jpy'
+      )
+  end
 
 end
