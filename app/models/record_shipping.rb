@@ -14,6 +14,7 @@ class RecordShipping
     validates :municipalities
     validates :street_address
     validates :telephon_number, format: { with: /\A\d{10,11}\z/, message: "must be 10 or 11 digits" }
+    validates :token
   end
 
 

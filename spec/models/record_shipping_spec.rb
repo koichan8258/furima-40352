@@ -82,6 +82,12 @@ RSpec.describe User, type: :model do
         @record_shipping.valid?
         expect(@record_shipping.errors.full_messages).to include('Telephon number must be 10 or 11 digits')
       end
+
+      it "tokenが空では登録できないこと" do
+        @record_shipping.token = nil
+        @record_shipping.valid?
+        expect(@record_shipping.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
