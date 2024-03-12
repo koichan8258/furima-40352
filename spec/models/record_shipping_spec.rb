@@ -22,7 +22,6 @@ RSpec.describe User, type: :model do
     end
 
     context '商品が購入できない場合' do
-
       it 'post_cordが空では購入できない' do
         @record_shipping.post_cord = ''
         @record_shipping.valid?
@@ -70,20 +69,20 @@ RSpec.describe User, type: :model do
         @record_shipping.valid?
         expect(@record_shipping.errors.full_messages).to include('Telephon number must be 10 or 11 digits')
       end
-  
+
       it 'telephon_numberが12桁以上の半角数値では購入できない' do
         @record_shipping.telephon_number = '123456789012'
         @record_shipping.valid?
         expect(@record_shipping.errors.full_messages).to include('Telephon number must be 10 or 11 digits')
       end
-  
+
       it 'telephon_numberが半角数値以外では購入できない' do
         @record_shipping.telephon_number = 'abcdefghijk'
         @record_shipping.valid?
         expect(@record_shipping.errors.full_messages).to include('Telephon number must be 10 or 11 digits')
       end
 
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @record_shipping.token = nil
         @record_shipping.valid?
         expect(@record_shipping.errors.full_messages).to include("Token can't be blank")
