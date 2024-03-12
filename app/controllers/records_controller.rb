@@ -1,10 +1,14 @@
 class RecordsController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, only: [:index, :create]
 
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @item = Item.find(params[:item_id])
-    @record_shipping = RecordShipping.new
+    if current_user.id == @item.user_id
+      redirect_to root_path 
+    else
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      @record_shipping = RecordShipping.new
+    end
   end
 
   def new
