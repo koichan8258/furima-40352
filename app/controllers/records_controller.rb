@@ -30,7 +30,7 @@ class RecordsController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_8fb240c5c4f4845ea3ee1726"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
 
       item = Item.find(record_params[:item_id])
       selling_price = item.selling_price
