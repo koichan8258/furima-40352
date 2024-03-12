@@ -3,7 +3,7 @@ class RecordsController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
-    if current_user.id == @item.user_id
+    if current_user.id == @item.user_id || @item.record.present?
       redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
