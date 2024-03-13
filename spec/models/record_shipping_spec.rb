@@ -1,21 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe RecordShipping, type: :model do
   before do
-    @record_shipping = FactoryBot.build(:record_shipping)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item, user:)
+    @record_shipping = FactoryBot.build(:record_shipping, prefecture_id: 2, item_id: item.id, user_id: user.id)
   end
 
   describe '商品の購入' do
     context '商品の購入ができる場合' do
-      user = FactoryBot.create(:user)
-      item = FactoryBot.create(:item, user_id: user.id)
       it '必要な情報を適切に入力すると、購入できる' do
-        @record_shipping = FactoryBot.build(:record_shipping, prefecture_id: 2, user_id: user.id, item_id: item.id)
         expect(@record_shipping).to be_valid
       end
 
       it 'building_nameは空でも購入できる' do
-        @record_shipping = FactoryBot.build(:record_shipping, prefecture_id: 2, user_id: user.id, item_id: item.id)
         @record_shipping.building_name = ''
         expect(@record_shipping).to be_valid
       end
@@ -58,6 +56,12 @@ RSpec.describe User, type: :model do
         expect(@record_shipping.errors.full_messages).to include("Municipalities can't be blank")
       end
 
+      it 'street_addressが空では購入できない' do
+        @record_shipping.street_address = ''
+        @record_shipping.valid?
+        expect(@record_shipping.errors.full_messages).to include("Street address can't be blank")
+      end
+
       it 'telephon_numberが空では購入できない' do
         @record_shipping.telephon_number = ''
         @record_shipping.valid?
@@ -86,6 +90,18 @@ RSpec.describe User, type: :model do
         @record_shipping.token = nil
         @record_shipping.valid?
         expect(@record_shipping.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it 'userが紐付いていないと保存できない' do
+        @record_shipping.user_id = nil
+        @record_shipping.valid?
+        expect(@record_shipping.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐付いていないと保存できない' do
+        @record_shipping.item_id = nil
+        @record_shipping.valid?
+        expect(@record_shipping.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

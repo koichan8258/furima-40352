@@ -11,10 +11,6 @@ class RecordsController < ApplicationController
     end
   end
 
-  def new
-    @record_shipping = RecordShipping.new
-  end
-
   def create
     @record_shipping = RecordShipping.new(record_params)
     if @record_shipping.valid?
