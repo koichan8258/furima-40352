@@ -19,6 +19,6 @@ window.addEventListener('turbo:load', () => {
 
     priceInput.addEventListener("input", recalculate);
 
-    recalculate();
+    recalculate(); // ページロード時にも初回計算を実行
   }
 });
