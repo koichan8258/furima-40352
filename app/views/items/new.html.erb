@@ -1,7 +1,7 @@
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), new_item_path %>
-    <div class="selling-price">
+    <script src="selling-price.js"></script>
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
@@ -87,7 +87,7 @@
     <%# /配送について %>
 
     <%# 販売価格 %>
-     <script src="selling-price.js"></script>
+    <div class="selling-price">
       <div class="weight-bold-text question-text">
         <span>販売価格<br>(¥300〜9,999,999)</span>
         <a class="question" href="#">?</a>
