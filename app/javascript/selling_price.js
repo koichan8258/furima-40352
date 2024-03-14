@@ -1,7 +1,8 @@
 window.addEventListener('turbo:load', () => {
   const priceInput = document.getElementById("item-price");
   if (priceInput) {
-    priceInput.addEventListener("input", () => {
+    // 再計算関数を定義
+    const recalculate = () => {
       const inputValue = parseFloat(priceInput.value);
 
       if (!isNaN(inputValue)) { 
@@ -13,9 +14,12 @@ window.addEventListener('turbo:load', () => {
         const profitDom = document.getElementById("profit");
         profitDom.innerHTML = profit;
       } else {
-
         console.error("Invalid input: Not a number");
       }
-    });
+    };
+
+    priceInput.addEventListener("input", recalculate);
+
+    recalculate();
   }
 });
